@@ -1,12 +1,12 @@
 package mghaby;
 
-/**
- * Hello world!
- *
- */
 public class App {
     public static void main( String[] args ){
-        System.out.println( "Hello World!" );
+        Logger logger = new Logger("GBPAUD", 10000, 2);
+        logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
+        System.out.println(logger.getLastTrade());
+        //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
+
     }
 }
 

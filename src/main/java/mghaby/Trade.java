@@ -15,7 +15,6 @@ public class Trade {
         this.takeProfitInPips = takeProfitInPips;
     }
 
-
     public String toString(){
         return "Trade ID: " + tradeId + " Time: " + time + " Date: " + date + " Stop Loss: " + stopLossInPips + " Take Profit: " + takeProfitInPips;
     }

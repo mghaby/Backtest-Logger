@@ -1,11 +1,11 @@
 package mghaby;
+import java.util.ArrayList;
 
-
-public class Logger { // make this class a singleton
+public class Logger {
     String pair;
     double startingAccountBalance;
     int riskPerPosition;
-    Trade[] trades;
+    ArrayList<Trade> trades = new ArrayList<Trade>(100);
 
     Logger(String pair, double startingAccountBalance, int riskPerPosition) {
         this.pair = pair;
@@ -13,35 +13,35 @@ public class Logger { // make this class a singleton
         this.riskPerPosition = riskPerPosition;
     }
 
-    public void addTrade(Trade trade) {
-        trades[trades.length] = trade;
-        postToDB();
+    public int generateTradeID() {
+        return trades.size() + 1;
     }
 
-    public void getLastTrade() {
-        // get the last trade
+    public void addTrade(Trade trade){
+        trades.add(trade);
+       // postToDB();
     }
 
-    public void getAllTrades() {
-        for (int i = 0; i < trades.length; i++) {
-            System.out.println(trades[i]);
+    public Trade getLastTrade() {
+        if (trades.size() == 0){
+            return trades.get(0);
+        }
+        return trades.get(trades.size() - 1);
+    }
+
+    public void printAllTrades() {
+        for (Trade i : trades){
+            System.out.println(i);
         }
     }
 
     public void postToDB() {
-        // write trades to the json file
+       // post trades to json file
     }
 
     public void getFromDB() {
         // read trades from the json file
     }
 
-    public int generateTradeID() {
-        return trades.length + 1;
-    }
-
-
-
-    
         
 }
