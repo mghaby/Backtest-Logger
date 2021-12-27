@@ -35,7 +35,7 @@ public class Logger {
     public void addTrade(Trade trade){
         trades.add(trade);
         calculateCurrentBalance();
-       // postToDB();
+        //postToDB();
     }
 
     public Trade getLastTrade() {
@@ -84,8 +84,5 @@ public class Logger {
         calculateTotalDrawdownPercentage();
         return totalDrawdown;
     }
-
-
-
         
 }

@@ -1,40 +1,39 @@
 package mghaby;
 
 import java.util.*;
-import java.io.FileWriter;
-import java.io.IOException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class App {
-    public static void main( String[] args ){
-        System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log (1) OR access an old log? (2)");
-        Scanner newOrOld = new Scanner(System.in);
-        // if (inputisValid() && input == 1)
-            // ask for pair, starting acc balance, and risk per trade
-        // 
+    public static void main(String[] args ){
+        boolean newOrOldBool = true;
+        int newOrOldDecisionOut =0 ;
 
+        System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
 
+        while (newOrOldBool){
+            Scanner newOrOld = new Scanner(System.in);
+            int newOrOldDecision = newOrOld.nextInt();
+            newOrOldDecisionOut = newOrOldDecision;
 
+            try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
 
+            if (newOrOldDecision == 1 || newOrOldDecision == 2) {
+                newOrOldBool = false;
+            } else {
+                System.out.println("Invalid input. Please try again.");
+            }
+        }
 
-
-
-
-
-
+        if (newOrOldDecisionOut == 1){
+            // make new log here
+        } else {
+            // access old log here
+        }
 
 
         //Logger logger = new Logger("GBPAUD", 10000, 2);
         //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
         //System.out.println(logger.getLastTrade());
         //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
-
-
-
-
-
-
 
 
         /**
