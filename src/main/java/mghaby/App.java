@@ -1,12 +1,54 @@
 package mghaby;
 
+import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class App {
     public static void main( String[] args ){
-        Logger logger = new Logger("GBPAUD", 10000, 2);
-        logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
-        System.out.println(logger.getLastTrade());
+        System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log (1) OR access an old log? (2)");
+        Scanner newOrOld = new Scanner(System.in);
+        // if (inputisValid() && input == 1)
+            // ask for pair, starting acc balance, and risk per trade
+        // 
+
+
+
+
+
+
+
+
+
+
+
+
+        //Logger logger = new Logger("GBPAUD", 10000, 2);
+        //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
+        //System.out.println(logger.getLastTrade());
         //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
 
+
+
+
+
+
+
+
+        /**
+        JSONObject database = new JSONObject();
+        database.put("test", "test2");
+        JSONArray dblist = new JSONArray();
+        dblist.add(database);
+        try (FileWriter file = new FileWriter("db.json")){
+            file.write(dblist.toJSONString());
+            file.flush();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+         */         // this prints to db.json in main directory for some reason
     }
 }
 

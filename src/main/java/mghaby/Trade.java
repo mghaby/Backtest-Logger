@@ -5,18 +5,18 @@ public class Trade {
     String time;
     String date;
     int stopLossInPips;
-    int takeProfitInPips;
+    int finalPipAmmount;
 
-    public Trade(int tradeId, String time, String date, int stopLossInPips, int takeProfitInPips) {
+    public Trade(int tradeId, String time, String date, int stopLossInPips, int finalPipAmmount) {
         this.tradeId = tradeId;
         this.time = time;
         this.date = date;
         this.stopLossInPips = stopLossInPips;
-        this.takeProfitInPips = takeProfitInPips;
+        this.finalPipAmmount = finalPipAmmount;
     }
 
     public String toString(){
-        return "Trade ID: " + tradeId + " Time: " + time + " Date: " + date + " Stop Loss: " + stopLossInPips + " Take Profit: " + takeProfitInPips;
+        return "Trade ID: " + tradeId + " Time: " + time + " Date: " + date + " Stop Loss: " + stopLossInPips + " Final Pip Ammount: " + finalPipAmmount;
     }
 
 }
