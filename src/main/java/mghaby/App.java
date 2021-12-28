@@ -5,16 +5,16 @@ import java.util.*;
 public class App {
     public static void main(String[] args ){
         boolean newOrOldBool = true;
-        int newOrOldDecisionOut = 0;
+        int newOrOldDecision = 0;
         boolean newLogBool = true;
+        boolean tradeBool = true;
         Logger logger;
 
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
 
         while (newOrOldBool){
-            Scanner newOrOld = new Scanner(System.in);
-            int newOrOldDecision = newOrOld.nextInt();
-            newOrOldDecisionOut = newOrOldDecision;
+            Scanner newOrOldScanner = new Scanner(System.in);
+            newOrOldDecision = newOrOldScanner.nextInt();
 
             try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
 
@@ -25,14 +25,14 @@ public class App {
             }
         }
 
-        if (newOrOldDecisionOut == 1){
+        if (newOrOldDecision == 1){
             System.out.println("Please input the pair, starting balance and risk per position seperated by new line characters.");
 
             while (newLogBool){
-                Scanner newLog = new Scanner(System.in);
-                String nLPair = newLog.nextLine();
-                Double nLStartingBalance = newLog.nextDouble();
-                Integer nLRisk = newLog.nextInt();
+                Scanner newLogScanner = new Scanner(System.in);
+                String nLPair = newLogScanner.nextLine();
+                Double nLStartingBalance = newLogScanner.nextDouble();
+                Integer nLRisk = newLogScanner.nextInt();
 
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
 
@@ -42,6 +42,17 @@ public class App {
                 } else {
                     System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
                 }
+            }
+
+            System.out.println("Would you like to log a new trade? (1) OR View current results (2) OR Exit (3)");
+            while (tradeBool){
+                //Scanner newTradeBoolScanner = new Scanner(System.in);
+
+
+                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+
+
+
             }
 
             // make a loop here to check "do you want to add a new trade or quit" if add new trade make another loop asking for inputs etc and use the add logger method thing / if quit look to exit(1) or view drawdown n that
