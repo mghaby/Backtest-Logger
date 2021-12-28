@@ -44,7 +44,7 @@ public class App {
                 }
             }
 
-            // make a loop here to check "do you want to add a new trade or quit" if add new trade make another loop asking for inputs etc and use the add logger method thing / if quit exit(1) type thing
+            // make a loop here to check "do you want to add a new trade or quit" if add new trade make another loop asking for inputs etc and use the add logger method thing / if quit look to exit(1) or view drawdown n that
 
 
 
