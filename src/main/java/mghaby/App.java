@@ -7,6 +7,7 @@ public class App {
         boolean newOrOldBool = true;
         int newOrOldDecisionOut = 0;
         boolean newLogBool = true;
+        Logger logger;
 
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
 
@@ -36,12 +37,14 @@ public class App {
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
 
                 if ((nLPair instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){
-                    Logger logger = new Logger(nLPair, nLStartingBalance, nLRisk);
+                    logger = new Logger(nLPair, nLStartingBalance, nLRisk);
                     newLogBool = false;
                 } else {
                     System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
                 }
             }
+
+            // make a loop here to check "do you want to add a new trade or quit" if add new trade make another loop asking for inputs etc and use the add logger method thing / if quit exit(1) type thing
 
 
 
