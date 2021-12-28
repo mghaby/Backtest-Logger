@@ -30,12 +30,12 @@ public class App {
             while (newLogBool){
                 Scanner newLog = new Scanner(System.in);
                 String nLPair = newLog.nextLine();
-                double nLStartingBalance = newLog.nextDouble();
-                int nLRisk = newLog.nextInt();
+                Double nLStartingBalance = newLog.nextDouble();
+                Integer nLRisk = newLog.nextInt();
 
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
 
-                if ((nLPair instanceof String) && (nLStartingBalance instanceof double) && (nLRisk instanceof int)){ // this line is broken
+                if ((nLPair instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){
                     Logger logger = new Logger(nLPair, nLStartingBalance, nLRisk);
                     newLogBool = false;
                 } else {
