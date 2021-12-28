@@ -1,6 +1,7 @@
 package mghaby;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+/**
 import java.io.FileNotFoundException;
 
 import java.io.FileWriter;
@@ -10,7 +11,7 @@ import org.json.simple.parser.ParseException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+*/
 
 public class Logger {
     String pair;
