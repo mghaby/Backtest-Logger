@@ -68,6 +68,7 @@ public class Logger {
     }
 
     public double getCurrentBalance(){
+        calculateCurrentBalance();
         return currentBalance;
     }
 
