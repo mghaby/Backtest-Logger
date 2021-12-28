@@ -5,7 +5,8 @@ import java.util.*;
 public class App {
     public static void main(String[] args ){
         boolean newOrOldBool = true;
-        int newOrOldDecisionOut =0 ;
+        int newOrOldDecisionOut = 0;
+        boolean newLogBool = true;
 
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
 
@@ -24,6 +25,26 @@ public class App {
         }
 
         if (newOrOldDecisionOut == 1){
+            System.out.println("Please input the pair, starting balance and risk per position seperated by new line characters.");
+
+            while (newLogBool){
+                Scanner newLog = new Scanner(System.in);
+                String nLPair = newLog.nextLine();
+                double nLStartingBalance = newLog.nextDouble();
+                int nLRisk = newLog.nextInt();
+
+                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+
+                if ((nLPair instanceof String) && (nLStartingBalance instanceof double) && (nLRisk instanceof int)){ // this line is broken
+                    Logger logger = new Logger(nLPair, nLStartingBalance, nLRisk);
+                    newLogBool = false;
+                } else {
+                    System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
+                }
+            }
+
+
+
             // make new log here
         } else {
             // access old log here
@@ -49,6 +70,18 @@ public class App {
         }
          */         // this prints to db.json in main directory for some reason
     }
+
+    // methods here
+
+
+
+
+
+
+
+
+
+
 }
 
 // essnetialy this should mimic stevens excel spreadsheet but act as an interface for it and the database.

@@ -28,7 +28,7 @@ public class Logger {
         totalDrawdown = 0;
     }
 
-    public int generateTradeID() {
+    public int generateTradeID(){
         return trades.size() + 1;
     }
 
@@ -38,7 +38,7 @@ public class Logger {
         //postToDB();
     }
 
-    public Trade getLastTrade() {
+    public Trade getLastTrade(){
         if (trades.size() <= 0){
             System.out.println("No Trades Yet!");
             throw new NoSuchElementException();
@@ -46,17 +46,17 @@ public class Logger {
         return trades.get(trades.size() - 1);
     }
 
-    public void printAllTrades() {
+    public void printAllTrades(){
         for (Trade i : trades){
             System.out.println(i);
         }
     }
 
-    public void postToDB() {
+    public void postToDB(){
        // post trades to json file
     }
 
-    public void getFromDB() {
+    public void getFromDB(){
         // read trades from the json file
     }
 
