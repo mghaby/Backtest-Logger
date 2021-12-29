@@ -40,13 +40,12 @@ public class App {
                 Double nLStartingBalance = newLogScanner.nextDouble();
                 Integer nLRisk = newLogScanner.nextInt();
 
-                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
-
                 if ((nLPair instanceof String) && (nLTimeframe instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){
                     logger = new Logger(nLPair, nLTimeframe, nLStartingBalance, nLRisk);
                     newLogBool = false;
                 } else {
                     System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
+                    try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                 }
             }
 
@@ -64,10 +63,16 @@ public class App {
                             Scanner newTradeScanner = new Scanner(System.in);
                             String timeOfTrade = newTradeScanner.nextLine();
                             String dateOfTrade = newTradeScanner.nextLine();
-                            int stopLossInPips = newTradeScanner.nextInt();
-                            int finalPipAmmount = newTradeScanner.nextInt();
+                            Integer stopLossInPips = newTradeScanner.nextInt();
+                            Integer finalPipAmmount = newTradeScanner.nextInt();
 
-                            //if () all are correct data types are correct logger.addTrade(new Trade(stuff here)) && tradebool = false // else {print invalid data message and thread.sleep }
+                            if ((timeOfTrade instanceof String) && (dateOfTrade instanceof String) && (stopLossInPips instanceof Integer) && (finalPipAmmount instanceof Integer)){
+                                logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade,  dateOfTrade, stopLossInPips, finalPipAmmount));
+                                tradeCreationBool = false;
+                            } else {
+                                System.out.println("Inccorect Type: Date, Time, Stoploss or Final Pip Value. Please try again.");
+                                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+                            }
                         }
                         break;
 
@@ -85,18 +90,16 @@ public class App {
                         System.exit(0);
                     }
 
-                    try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                 } else {
                     System.out.println("Invalid input. Please try again.");
                     try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                 }
-
-
             }
-        
-        // Accessing old log here
         } else {
             // access old log here
+
+
+            
         }
 
 
@@ -114,8 +117,5 @@ public class App {
          */         // this prints to db.json in main directory for some reason
     }
 
-    // methods here if needed
-
+    // methods here
 }
-
-// use jframe and jbuttons to add trades to the logger (let it be ugly until it is done)
