@@ -13,16 +13,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 */
 
-public class Logger {
-    String pair;
-    double startingBalance;
-    double currentBalance;
-    int riskPerPosition;
-    int totalDrawdown;
+public class Logger { // Make Aditions to accomodate timeframe
+    private String pair;
+    private String timeframe;
+    private double startingBalance;
+    private double currentBalance;
+    private int riskPerPosition;
+    private int totalDrawdown;
     ArrayList<Trade> trades = new ArrayList<Trade>(100); // 100 Trades to get comfortable with a strategy
 
-    Logger(String pair, double startingBalance, int riskPerPosition) {
+    Logger(String pair, String timeframe, double startingBalance, int riskPerPosition) {
         this.pair = pair;
+        this.timeframe = timeframe;
         this.startingBalance = startingBalance;
         this.riskPerPosition = riskPerPosition;
         currentBalance = startingBalance;
@@ -31,6 +33,18 @@ public class Logger {
 
     public int generateTradeID(){
         return trades.size() + 1;
+    }
+
+    public double getStartingBalance(){
+        return startingBalance;
+    }
+    
+    public String getPair(){
+        return pair;
+    }
+
+    public String getTimeframe(){
+        return timeframe;
     }
 
     public void addTrade(Trade trade){

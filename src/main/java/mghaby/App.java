@@ -30,17 +30,18 @@ public class App {
         if (newOrOldDecision == 1){
             
             // New Logger creation
-            System.out.println("Please input the pair, starting balance and risk per position seperated by new line characters.");
+            System.out.println("Please input the pair, timeframe, starting balance and risk per position seperated by new line characters.");
             while (newLogBool){
                 Scanner newLogScanner = new Scanner(System.in);
                 String nLPair = newLogScanner.nextLine();
+                String nLTimeframe = newLogScanner.nextLine();
                 Double nLStartingBalance = newLogScanner.nextDouble();
                 Integer nLRisk = newLogScanner.nextInt();
 
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
 
-                if ((nLPair instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){
-                    logger = new Logger(nLPair, nLStartingBalance, nLRisk);
+                if ((nLPair instanceof String) && (nLTimeframe instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){
+                    logger = new Logger(nLPair, nLTimeframe, nLStartingBalance, nLRisk);
                     newLogBool = false;
                 } else {
                     System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
@@ -60,15 +61,11 @@ public class App {
                         break;
 
                         case 2: // Print Logger data
-                        System.out.println("Starting Balance :");
-
-                        System.out.println("Current Balance :");
-                        System.out.println(logger.currentBalance);
-
-                        System.out.println("Total Drawdown :");
-                        System.out.println("");
-
-                        System.out.println("All Trades :");
+                        System.out.println("Pair: " + logger.getPair() + " Timeframe: " + logger.getTimeframe());
+                        System.out.println("Starting Balance: $" + logger.getStartingBalance());
+                        System.out.println("Current Balance: $" + logger.getCurrentBalance());
+                        System.out.println("Total Drawdown: " + logger.getTotalDrawdown() + "%");
+                        System.out.println("All Trades:");
                         logger.printAllTrades();
                         break;
 
