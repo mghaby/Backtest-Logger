@@ -1,5 +1,4 @@
 package mghaby;
-
 import java.util.*;
 
 public class App {
@@ -12,7 +11,6 @@ public class App {
         boolean tradeBool = true;
         boolean tradeCreationBool = true;
         Logger logger = null;
-        
 
         // Check if new or old logger
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
@@ -99,7 +97,7 @@ public class App {
             // access old log here
 
 
-            
+
         }
 
 
@@ -108,14 +106,22 @@ public class App {
         database.put("test", "test2");
         JSONArray dblist = new JSONArray();
         dblist.add(database);
-        try (FileWriter file = new FileWriter("db.json")){
+        try (FileWriter file = new FileWriter("db.json")){ 
             file.write(dblist.toJSONString());
             file.flush();
         } catch (IOException e){
             e.printStackTrace();
         }
-         */         // this prints to db.json in main directory for some reason
-    }
+         */         // this prints to db.json in main directory
 
-    // methods here
+    // App methods here
+    }
 }
+
+
+// so far all need to do is populate the App.java logger variable with the set JSON array from the db.json file, 
+// we will have a method that it can call on itself that will essentially do everything, then we can copy and paste the code for making new trades that we have from ~50-89
+// also need to make a method that writes to the database and is called after everytime a new trade is initialised ( we can add this into the addTrade method in logger.java to make implementation easy)
+
+
+// make a seperate maven project and implement the json code above and see how to manipulate where the db saves, chuck it into a db folder if possible
