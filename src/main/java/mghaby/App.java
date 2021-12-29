@@ -10,7 +10,9 @@ public class App {
         int tradeBoolDecision = 0;
         boolean newLogBool = true;
         boolean tradeBool = true;
+        boolean tradeCreationBool = true;
         Logger logger = null;
+        
 
         // Check if new or old logger
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
@@ -49,15 +51,24 @@ public class App {
             }
 
             // Trade options checks
-            System.out.println("Would you like to log a new trade? (1) OR View current results (2) OR Exit (3)");
             while (tradeBool){
+                System.out.println("Would you like to log a new trade? (1) OR View current results (2) OR Exit (3)");
                 Scanner tradeBoolScanner = new Scanner(System.in);
                 tradeBoolDecision = tradeBoolScanner.nextInt();
 
                 if (tradeBoolDecision == 1 || tradeBoolDecision == 2 || tradeBoolDecision == 3){
                     switch (tradeBoolDecision){
                         case 1: // new Trade creation
-                        //logic here
+                        System.out.println("Please input the time of trade, date of trade, stoploss in pips and final pip ammount seperated by new line characters");
+                        while (tradeCreationBool){
+                            Scanner newTradeScanner = new Scanner(System.in);
+                            String timeOfTrade = newTradeScanner.nextLine();
+                            String dateOfTrade = newTradeScanner.nextLine();
+                            int stopLossInPips = newTradeScanner.nextInt();
+                            int finalPipAmmount = newTradeScanner.nextInt();
+
+                            //if () all are correct data types are correct logger.addTrade(new Trade(stuff here)) && tradebool = false // else {print invalid data message and thread.sleep }
+                        }
                         break;
 
                         case 2: // Print Logger data
@@ -72,16 +83,9 @@ public class App {
                         case 3: // Exit
                         System.out.println("Thanks for using the logger!");
                         System.exit(0);
-
                     }
 
-                    // case statement here
-                    // 1 = new Trade();
-                        // while loop
-                            // print statemtn about the trade reqs
-                            // if (instance checks here) { new Trade} else {print wrong whatever and loop back} && in else try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
-                    // 2 = print logger.printAllTrades, logger.get whatever
-                    // 3 = print thanks for using; exit(1);
+                    try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                 } else {
                     System.out.println("Invalid input. Please try again.");
                     try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -94,12 +98,6 @@ public class App {
         } else {
             // access old log here
         }
-
-
-        //Logger logger = new Logger("GBPAUD", 10000, 2);
-        //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
-        //System.out.println(logger.getLastTrade());
-        //logger.addTrade(new Trade(1, "10AM", "21,09", 40, 80));
 
 
         /**
