@@ -2,7 +2,8 @@ package mghaby;
 import java.util.*;
 
 public class App {
-    public static void main(String[] args ){
+    public static void main(String[] args ){ // get rid of the instanceof operators in this whole file when you figure out how to handle the `inputMismatchException`1
+
         // Variables
         boolean newOrOldBool = true;
         int newOrOldDecision = 0;
@@ -22,8 +23,9 @@ public class App {
                 newOrOldBool = false;
             } else {
                 System.out.println("Invalid input. Please try again.");
-                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
             }
+
+            try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
         // New Logger & Trade loop
@@ -43,8 +45,9 @@ public class App {
                     newLogBool = false;
                 } else {
                     System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
-                    try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                 }
+
+                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
             }
 
             // Trade options checks
@@ -65,22 +68,27 @@ public class App {
                             Integer finalPipAmmount = newTradeScanner.nextInt();
 
                             if ((timeOfTrade instanceof String) && (dateOfTrade instanceof String) && (stopLossInPips instanceof Integer) && (finalPipAmmount instanceof Integer)){
-                                logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade,  dateOfTrade, stopLossInPips, finalPipAmmount));
+                                logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade, dateOfTrade, stopLossInPips, finalPipAmmount));
                                 tradeCreationBool = false;
                             } else {
                                 System.out.println("Inccorect Type: Date, Time, Stoploss or Final Pip Value. Please try again.");
-                                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                             }
+
+                            try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                         }
                         break;
 
                         case 2: // Print Logger data
-                        System.out.println("Pair: " + logger.getPair() + " Timeframe: " + logger.getTimeframe());
-                        System.out.println("Starting Balance: $" + logger.getStartingBalance());
-                        System.out.println("Current Balance: $" + logger.getCurrentBalance());
-                        System.out.println("Total Drawdown: " + logger.getTotalDrawdown() + "%");
-                        System.out.println("All Trades:");
-                        logger.printAllTrades();
+                        if (logger.trades.size() < 1){
+                            System.out.println("No Trades To Print");
+                        } else {
+                            System.out.println("Pair: " + logger.getPair() + " Timeframe: " + logger.getTimeframe());
+                            System.out.println("Starting Balance: $" + logger.getStartingBalance());
+                            System.out.println("Current Balance: $" + logger.getCurrentBalance());
+                            System.out.println("Total Drawdown: " + logger.getTotalDrawdown() + "%");
+                            System.out.println("All Trades:");
+                            logger.printAllTrades();
+                        }
                         break;
 
                         case 3: // Exit
@@ -90,8 +98,9 @@ public class App {
 
                 } else {
                     System.out.println("Invalid input. Please try again.");
-                    try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
                 }
+
+                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
             }
         } else {
             // access old log here

@@ -53,7 +53,7 @@ public class Logger { // Make Aditions to accomodate timeframe
         //postToDB();
     }
 
-    public Trade getLastTrade(){
+    public Trade getLastTrade(){ // handle NoSuchElementException properly
         if (trades.size() <= 0){
             System.out.println("No Trades Yet!");
             throw new NoSuchElementException();
@@ -75,8 +75,8 @@ public class Logger { // Make Aditions to accomodate timeframe
         // read trades from the json file
     }
 
-    public void calculateCurrentBalance(){
-        double positionDollarAmmount = getCurrentBalance() * (riskPerPosition / 100);
+    public void calculateCurrentBalance(){ // i dont think this is working
+        double positionDollarAmmount = currentBalance * (riskPerPosition / 100);
         double riskToRewardRatio = getLastTrade().stopLossInPips / getLastTrade().finalPipAmmount;
         currentBalance += (positionDollarAmmount * riskToRewardRatio);
     }
