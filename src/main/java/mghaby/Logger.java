@@ -1,9 +1,10 @@
 package mghaby;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import java.io.FileNotFoundException;
-
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.json.simple.parser.JSONParser;
@@ -80,7 +81,7 @@ public class Logger {
        JSONArray tradesArray = new JSONArray();
        JSONObject tradesArrayObj = new JSONObject();
 
-       for (int i = 0; i < trades.size(); i++){ // this might keep adding tradeId fields etc so need to test if its rewritting
+       for (int i = 0; i < trades.size(); i++){
             tradesArrayObj.put("tradeId", trades.get(i).tradeId);
             tradesArrayObj.put("time", trades.get(i).time);
             tradesArrayObj.put("date", trades.get(i).date);
@@ -100,8 +101,33 @@ public class Logger {
        }
     }
 
-    public void getFromDB(){
-        // read trades from the json file
+    public void getFromDB(){ // might have to move this whole method from logger and into the App.java file
+        JSONParser parser = new JSONParser();
+
+        try {
+            Object obj = parser.parse(new FileReader("db.json"));
+            JSONObject jsonObj = (JSONObject) obj;
+            String pairHolder = (String) jsonObj.get("pair");
+            String timeframeHolder = (String) jsonObj.get("timeframe");
+            String startingBalanceHolder = (String) jsonObj.get("startingBalance");
+            String currentBalanceHolder = (String) jsonObj.get("currentBalance");
+            String riskPerPositionHolder = (String) jsonObj.get("riskPerPosition");
+            String totalDrawdownHolder = (String) jsonObj.get("totalDrawdown");
+
+            JSONArray tradeHolder = (JSONArray) jsonObj.get("trades");
+            Iterator<Trade> iterator = tradeHolder.iterator();
+
+            while (iterator.hasNext()){
+                // trades.add(trade(i));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
     }
 
     public void calculateCurrentBalance(){
