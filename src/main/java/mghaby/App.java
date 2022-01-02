@@ -1,17 +1,24 @@
 package mghaby;
+
 import java.util.*;
+import java.util.Iterator;
+import java.io.FileReader;
+import org.json.simple.parser.JSONParser;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class App {
-    public static void main(String[] args ){ // get rid of the instanceof operators in this whole file when you figure out how to handle the `inputMismatchException`1
+    // Variables
+    static boolean newOrOldBool = true;
+    static int newOrOldDecision = 0;
+    static int tradeBoolDecision = 0;
+    static boolean newLogBool = true;
+    static boolean tradeBool = true;
+    static boolean tradeCreationBool = true;
+    static Logger logger = null;
 
-        // Variables
-        boolean newOrOldBool = true;
-        int newOrOldDecision = 0;
-        int tradeBoolDecision = 0;
-        boolean newLogBool = true;
-        boolean tradeBool = true;
-        boolean tradeCreationBool = true;
-        Logger logger = null;
+    public static void main(String[] args ){ // get rid of the instanceof operators in this whole file when you figure out how to handle the `inputMismatchException`1
 
         // Check if new or old logger
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
@@ -108,8 +115,37 @@ public class App {
 
 
         }
+        
+    }
 
-    // App methods here
+    public void getFromDB(){
+        JSONParser parser = new JSONParser();
+
+        try {
+            Object obj = parser.parse(new FileReader("db.json"));
+            JSONObject jsonObj = (JSONObject) obj;
+            String pairHolder = (String) jsonObj.get("pair");
+            String timeframeHolder = (String) jsonObj.get("timeframe");
+            double startingBalanceHolder = (double) jsonObj.get("startingBalance");
+            double currentBalanceHolder = (double) jsonObj.get("currentBalance");
+            int riskPerPositionHolder = (int) jsonObj.get("riskPerPosition");
+            int totalDrawdownHolder = (int) jsonObj.get("totalDrawdown");
+
+            logger = new Logger(pairHolder, timeframeHolder, startingBalanceHolder, riskPerPositionHolder);
+            logger.updateFromDB(currentBalanceHolder, totalDrawdownHolder);
+
+            JSONArray tradeHolder = (JSONArray) jsonObj.get("trades");
+            Iterator<Trade> iterator = tradeHolder.iterator();
+
+            while (iterator.hasNext()){
+                logger.addTrade(new Trade(
+                             iterator.next().tradeId, iterator.next().time, iterator.next().date, 
+                             iterator.next().stopLossInPips,iterator.next().finalPipAmmount));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
