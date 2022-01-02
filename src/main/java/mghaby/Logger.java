@@ -1,7 +1,7 @@
 package mghaby;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-/**
+
 import java.io.FileNotFoundException;
 
 import java.io.FileWriter;
@@ -11,9 +11,9 @@ import org.json.simple.parser.ParseException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-*/
 
-public class Logger { // Make Aditions to accomodate timeframe
+
+public class Logger {
     private String pair;
     private String timeframe;
     private double startingBalance;
@@ -68,8 +68,22 @@ public class Logger { // Make Aditions to accomodate timeframe
     }
 
     public void postToDB(){
-       // post trades to json file
+       JSONObject database = new JSONObject();
+       //database.put("")
     }
+
+            /**
+        JSONObject database = new JSONObject();
+        database.put("test", "test2");
+        JSONArray dblist = new JSONArray();
+        dblist.add(database);
+        try (FileWriter file = new FileWriter("db.json")){ 
+            file.write(dblist.toJSONString());
+            file.flush();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+         */         // this prints to db.json in main directory
 
     public void getFromDB(){
         // read trades from the json file

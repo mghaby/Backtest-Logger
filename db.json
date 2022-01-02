@@ -1,1 +1,20 @@
-[{"test":"test2"}]
+{
+    "Logger": {
+        "pair":"",
+        "timeframe":"",
+        "startingBalance":0.0,
+        "currentBalance":0.0,
+        "riskPerPosition":0,
+        "totalDrawdown":0,
+        
+        "trades": [
+            {
+            "tradeId": 0,
+            "time":"",
+            "date":"",
+            "stopLossInPips":0,
+            "finalPipAmmount":0
+            }
+        ]
+    }
+}
