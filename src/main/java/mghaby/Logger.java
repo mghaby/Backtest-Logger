@@ -69,7 +69,6 @@ public class Logger {
 
     public void postToDB(){
        JSONObject mainObj = new JSONObject();
-
        JSONObject loggerObj = new JSONObject();
        loggerObj.put("pair", pair);
        loggerObj.put("timeframe", timeframe);
@@ -81,7 +80,7 @@ public class Logger {
        JSONArray tradesArray = new JSONArray();
        JSONObject tradesArrayObj = new JSONObject();
 
-       for (int i = 0; i < trades.size(); i++){
+       for (int i = 0; i < trades.size(); i++){ // this might keep adding tradeId fields etc so need to test if its rewritting
             tradesArrayObj.put("tradeId", trades.get(i).tradeId);
             tradesArrayObj.put("time", trades.get(i).time);
             tradesArrayObj.put("date", trades.get(i).date);
@@ -91,7 +90,6 @@ public class Logger {
        }
 
        loggerObj.put("trades", tradesArray);
-
        mainObj.put("Logger", loggerObj);
 
        try (FileWriter file = new FileWriter("db.json")){
