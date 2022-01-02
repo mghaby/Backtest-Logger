@@ -23,6 +23,8 @@ public class App {
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
         while (newOrOldBool){
             Scanner newOrOldScanner = new Scanner(System.in);
+
+            // try here
             newOrOldDecision = newOrOldScanner.nextInt();
 
             if (newOrOldDecision == 1 || newOrOldDecision == 2) {
@@ -30,6 +32,8 @@ public class App {
             } else {
                 System.out.println("Invalid input. Please try again.");
             }
+
+            // end try here, catch estackprint here
 
             try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -41,14 +45,16 @@ public class App {
             System.out.println("Please input the pair, timeframe, starting balance and risk per position seperated by new line characters.");
             while (newLogBool){
                 Scanner newLogScanner = new Scanner(System.in);
+
+                //try here
                 String nLPair = newLogScanner.nextLine();
                 String nLTimeframe = newLogScanner.nextLine();
                 Double nLStartingBalance = newLogScanner.nextDouble();
                 Integer nLRisk = newLogScanner.nextInt();
 
-                if ((nLPair instanceof String) && (nLTimeframe instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){
+                if ((nLPair instanceof String) && (nLTimeframe instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){ // remove this & put `else` in catch
                     logger = new Logger(nLPair, nLTimeframe, nLStartingBalance, nLRisk);
-                    newLogBool = false;
+                    newLogBool = false; // try end here
                 } else {
                     System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
                 }
