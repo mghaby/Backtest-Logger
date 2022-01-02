@@ -1,14 +1,13 @@
 package mghaby;
 
 import java.util.*;
-import java.util.Iterator;
 import java.io.FileReader;
 import org.json.simple.parser.JSONParser;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class App {
+    
     // Variables
     static boolean newOrOldBool = true;
     static int newOrOldDecision = 0;
@@ -18,7 +17,7 @@ public class App {
     static boolean tradeCreationBool = true;
     static Logger logger = null;
 
-    public static void main(String[] args ){ // get rid of the instanceof operators in this whole file when you figure out how to handle the `inputMismatchException`1
+    public static void main(String[] args ){ // get rid of the instanceof operators in this whole file when you figure out how to handle the `inputMismatchException` -- i think its a try/catch block
 
         // Check if new or old logger
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
@@ -109,16 +108,66 @@ public class App {
 
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
             }
+
         } else {
-            // access old log here
+            getFromDB();
 
+            // Trade options checks
+            while (tradeBool){
+                System.out.println("Would you like to log a new trade? (1) OR View current results (2) OR Exit (3)");
+                Scanner tradeBoolScanner = new Scanner(System.in);
+                tradeBoolDecision = tradeBoolScanner.nextInt();
 
+                if (tradeBoolDecision == 1 || tradeBoolDecision == 2 || tradeBoolDecision == 3){
+                    switch (tradeBoolDecision){
+                        case 1: // new Trade creation
+                        System.out.println("Please input the time of trade, date of trade, stoploss in pips and final pip ammount seperated by new line characters");
+                        while (tradeCreationBool){
+                            Scanner newTradeScanner = new Scanner(System.in);
+                            String timeOfTrade = newTradeScanner.nextLine();
+                            String dateOfTrade = newTradeScanner.nextLine();
+                            Integer stopLossInPips = newTradeScanner.nextInt();
+                            Integer finalPipAmmount = newTradeScanner.nextInt();
 
+                            if ((timeOfTrade instanceof String) && (dateOfTrade instanceof String) && (stopLossInPips instanceof Integer) && (finalPipAmmount instanceof Integer)){
+                                logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade, dateOfTrade, stopLossInPips, finalPipAmmount));
+                                tradeCreationBool = false;
+                            } else {
+                                System.out.println("Inccorect Type: Date, Time, Stoploss or Final Pip Value. Please try again.");
+                            }
+
+                            try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+                        }
+                        break;
+
+                        case 2: // Print Logger data
+                        if (logger.trades.size() < 1){
+                            System.out.println("No Trades To Print");
+                        } else {
+                            System.out.println("Pair: " + logger.getPair() + " Timeframe: " + logger.getTimeframe());
+                            System.out.println("Starting Balance: $" + logger.getStartingBalance());
+                            System.out.println("Current Balance: $" + logger.getCurrentBalance());
+                            System.out.println("Total Drawdown: " + logger.getTotalDrawdown() + "%");
+                            System.out.println("All Trades:");
+                            logger.printAllTrades();
+                        }
+                        break;
+
+                        case 3: // Exit
+                        System.out.println("Thanks for using the logger!");
+                        System.exit(0);
+                    }
+
+                } else {
+                    System.out.println("Invalid input. Please try again.");
+                }
+
+                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+            }
         }
-        
     }
 
-    public void getFromDB(){
+    public static void getFromDB(){
         JSONParser parser = new JSONParser();
 
         try {
@@ -139,8 +188,8 @@ public class App {
 
             while (iterator.hasNext()){
                 logger.addTrade(new Trade(
-                             iterator.next().tradeId, iterator.next().time, iterator.next().date, 
-                             iterator.next().stopLossInPips,iterator.next().finalPipAmmount));
+                            iterator.next().tradeId, iterator.next().time, iterator.next().date, 
+                            iterator.next().stopLossInPips,iterator.next().finalPipAmmount));
             }
             
         } catch (Exception e) {
@@ -148,8 +197,3 @@ public class App {
         }
     }
 }
-
-
-// so far all need to do is populate the App.java logger variable with the set JSON array from the db.json file, 
-// we will have a method that it can call on itself that will essentially do everything, then we can copy and paste the code for making new trades that we have from ~50-89
-// also need to make a method that writes to the database and is called after everytime a new trade is initialised ( we can add this into the addTrade method in logger.java to make implementation easy)

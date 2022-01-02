@@ -1,6 +1,8 @@
 package mghaby;
 
 public class Trade {
+    
+    // Variables
     int tradeId;
     String time;
     String date;

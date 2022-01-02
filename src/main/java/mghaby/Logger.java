@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 
 
 public class Logger {
+    
+    // Variables 
     private String pair;
     private String timeframe;
     private double startingBalance;
