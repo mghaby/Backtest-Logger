@@ -50,7 +50,7 @@ public class Logger {
     public void addTrade(Trade trade){
         trades.add(trade);
         calculateCurrentBalance();
-        //postToDB();
+        postToDB();
     }
 
     public Trade getLastTrade(){ // handle NoSuchElementException properly
@@ -68,28 +68,45 @@ public class Logger {
     }
 
     public void postToDB(){
-       JSONObject database = new JSONObject();
-       //database.put("")
-    }
+       JSONObject mainObj = new JSONObject();
 
-            /**
-        JSONObject database = new JSONObject();
-        database.put("test", "test2");
-        JSONArray dblist = new JSONArray();
-        dblist.add(database);
-        try (FileWriter file = new FileWriter("db.json")){ 
-            file.write(dblist.toJSONString());
-            file.flush();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-         */         // this prints to db.json in main directory
+       JSONObject loggerObj = new JSONObject();
+       loggerObj.put("pair", pair);
+       loggerObj.put("timeframe", timeframe);
+       loggerObj.put("startingBalance", startingBalance);
+       loggerObj.put("currentBalance", currentBalance);
+       loggerObj.put("riskPerPosition", riskPerPosition);
+       loggerObj.put("totalDrawdown", totalDrawdown);
+
+       JSONArray tradesArray = new JSONArray();
+       JSONObject tradesArrayObj = new JSONObject();
+
+       for (int i = 0; i < trades.size(); i++){
+            tradesArrayObj.put("tradeId", trades.get(i).tradeId);
+            tradesArrayObj.put("time", trades.get(i).time);
+            tradesArrayObj.put("date", trades.get(i).date);
+            tradesArrayObj.put("stopLossInPips", trades.get(i).stopLossInPips);
+            tradesArrayObj.put("finalPipAmmount", trades.get(i).finalPipAmmount);
+            tradesArray.add(tradesArrayObj);
+       }
+
+       loggerObj.put("trades", tradesArray);
+
+       mainObj.put("Logger", loggerObj);
+
+       try (FileWriter file = new FileWriter("db.json")){
+           file.write(mainObj.toJSONString());
+           file.flush();
+       } catch (IOException e){
+           e.printStackTrace();
+       }
+    }
 
     public void getFromDB(){
         // read trades from the json file
     }
 
-    public void calculateCurrentBalance(){ // i dont think this is working
+    public void calculateCurrentBalance(){
         double positionDollarAmmount = currentBalance * (riskPerPosition / 100);
         double riskToRewardRatio = getLastTrade().stopLossInPips / getLastTrade().finalPipAmmount;
         currentBalance += (positionDollarAmmount * riskToRewardRatio);
