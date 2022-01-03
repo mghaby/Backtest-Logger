@@ -22,7 +22,6 @@ The application takes in multiple fields such as the pair, starting balance, tim
 
 ```
 cd backtestlogger/
-cd src/main/java/mghaby
 mvn compile
 cd target/classes/
 java App.class
