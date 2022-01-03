@@ -26,6 +26,13 @@ mvn compile
 cd target/classes/
 java App.class
 ```
+OR
+```
+cd backtestlogger/
+code .
+>Navigate To /src/main/java/mghaby/App.java
+>Run
+```
 
 ## Authors
 
