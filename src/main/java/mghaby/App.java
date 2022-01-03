@@ -23,17 +23,14 @@ public class App {
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
         while (newOrOldBool){
             Scanner newOrOldScanner = new Scanner(System.in);
-
-            // try here
-            newOrOldDecision = newOrOldScanner.nextInt();
-
-            if (newOrOldDecision == 1 || newOrOldDecision == 2) {
+            try {
+                newOrOldDecision = newOrOldScanner.nextInt();
                 newOrOldBool = false;
-            } else {
+
+            } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Invalid input. Please try again.");
             }
-
-            // end try here, catch estackprint here
 
             try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -45,18 +42,18 @@ public class App {
             System.out.println("Please input the pair, timeframe, starting balance and risk per position seperated by new line characters.");
             while (newLogBool){
                 Scanner newLogScanner = new Scanner(System.in);
+                try {
+                    String nLPair = newLogScanner.nextLine();
+                    String nLTimeframe = newLogScanner.nextLine();
+                    Double nLStartingBalance = newLogScanner.nextDouble();
+                    Integer nLRisk = newLogScanner.nextInt();
 
-                //try here
-                String nLPair = newLogScanner.nextLine();
-                String nLTimeframe = newLogScanner.nextLine();
-                Double nLStartingBalance = newLogScanner.nextDouble();
-                Integer nLRisk = newLogScanner.nextInt();
-
-                if ((nLPair instanceof String) && (nLTimeframe instanceof String) && (nLStartingBalance instanceof Double) && (nLRisk instanceof Integer)){ // remove this & put `else` in catch
                     logger = new Logger(nLPair, nLTimeframe, nLStartingBalance, nLRisk);
-                    newLogBool = false; // try end here
-                } else {
-                    System.out.println("Inccorect Type: Pair, Starting Balance or Risk. Please try again.");
+                    newLogBool = false;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Invalid input. Please try again.");
                 }
 
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -66,7 +63,12 @@ public class App {
             while (tradeBool){
                 System.out.println("Would you like to log a new trade? (1) OR View current results (2) OR Exit (3)");
                 Scanner tradeBoolScanner = new Scanner(System.in);
-                tradeBoolDecision = tradeBoolScanner.nextInt();
+                try {
+                    tradeBoolDecision = tradeBoolScanner.nextInt();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Invalid input. Please try again.");
+                }
 
                 if (tradeBoolDecision == 1 || tradeBoolDecision == 2 || tradeBoolDecision == 3){
                     switch (tradeBoolDecision){
@@ -74,16 +76,18 @@ public class App {
                         System.out.println("Please input the time of trade, date of trade, stoploss in pips and final pip ammount seperated by new line characters");
                         while (tradeCreationBool){
                             Scanner newTradeScanner = new Scanner(System.in);
-                            String timeOfTrade = newTradeScanner.nextLine();
-                            String dateOfTrade = newTradeScanner.nextLine();
-                            Integer stopLossInPips = newTradeScanner.nextInt();
-                            Integer finalPipAmmount = newTradeScanner.nextInt();
+                            try {
+                                String timeOfTrade = newTradeScanner.nextLine();
+                                String dateOfTrade = newTradeScanner.nextLine();
+                                Integer stopLossInPips = newTradeScanner.nextInt();
+                                Integer finalPipAmmount = newTradeScanner.nextInt();
 
-                            if ((timeOfTrade instanceof String) && (dateOfTrade instanceof String) && (stopLossInPips instanceof Integer) && (finalPipAmmount instanceof Integer)){
                                 logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade, dateOfTrade, stopLossInPips, finalPipAmmount));
                                 tradeCreationBool = false;
-                            } else {
-                                System.out.println("Inccorect Type: Date, Time, Stoploss or Final Pip Value. Please try again.");
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                System.out.println("Invalid input. Please try again.");
                             }
 
                             try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -130,16 +134,18 @@ public class App {
                         System.out.println("Please input the time of trade, date of trade, stoploss in pips and final pip ammount seperated by new line characters");
                         while (tradeCreationBool){
                             Scanner newTradeScanner = new Scanner(System.in);
-                            String timeOfTrade = newTradeScanner.nextLine();
-                            String dateOfTrade = newTradeScanner.nextLine();
-                            Integer stopLossInPips = newTradeScanner.nextInt();
-                            Integer finalPipAmmount = newTradeScanner.nextInt();
+                            try {
+                                String timeOfTrade = newTradeScanner.nextLine();
+                                String dateOfTrade = newTradeScanner.nextLine();
+                                Integer stopLossInPips = newTradeScanner.nextInt();
+                                Integer finalPipAmmount = newTradeScanner.nextInt();
 
-                            if ((timeOfTrade instanceof String) && (dateOfTrade instanceof String) && (stopLossInPips instanceof Integer) && (finalPipAmmount instanceof Integer)){
                                 logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade, dateOfTrade, stopLossInPips, finalPipAmmount));
                                 tradeCreationBool = false;
-                            } else {
-                                System.out.println("Inccorect Type: Date, Time, Stoploss or Final Pip Value. Please try again.");
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                System.out.println("Invalid input. Please try again.");
                             }
 
                             try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
