@@ -206,6 +206,7 @@ public class App {
             
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.print("No Previous Database to Integrate");
         }
     }
 }
