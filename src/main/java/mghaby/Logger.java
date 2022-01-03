@@ -55,10 +55,9 @@ public class Logger {
         postToDB();
     }
 
-    public Trade getLastTrade(){ // handle NoSuchElementException properly
+    public Trade getLastTrade(){
         if (trades.size() <= 0){
             System.out.println("No Trades Yet!");
-            throw new NoSuchElementException();
         }
         return trades.get(trades.size() - 1);
     }

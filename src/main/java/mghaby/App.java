@@ -17,7 +17,7 @@ public class App {
     static boolean tradeCreationBool = true;
     static Logger logger = null;
 
-    public static void main(String[] args ){ // get rid of the instanceof operators in this whole file when you figure out how to handle the `inputMismatchException` -- i think its a try/catch block
+    public static void main(String[] args ){
 
         // Check if new or old logger
         System.out.println("Welcome to the Backtest Logger! \nWould you like to create a new log? (1) OR Access an old log? (2)");
@@ -25,11 +25,13 @@ public class App {
             Scanner newOrOldScanner = new Scanner(System.in);
             try {
                 newOrOldDecision = newOrOldScanner.nextInt();
-                newOrOldBool = false;
-
+                if (newOrOldDecision == 1 || newOrOldDecision == 2){
+                    newOrOldBool = false;
+                } else {
+                    System.out.println("Invalid input. Please try again.");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Invalid input. Please try again.");
             }
 
             try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -50,7 +52,6 @@ public class App {
 
                     logger = new Logger(nLPair, nLTimeframe, nLStartingBalance, nLRisk);
                     newLogBool = false;
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("Invalid input. Please try again.");
@@ -84,7 +85,6 @@ public class App {
 
                                 logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade, dateOfTrade, stopLossInPips, finalPipAmmount));
                                 tradeCreationBool = false;
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 System.out.println("Invalid input. Please try again.");
@@ -119,7 +119,7 @@ public class App {
                 try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
             }
 
-        } else {
+        } else if (newOrOldDecision == 2) {
             getFromDB();
 
             // Trade options checks
@@ -142,7 +142,6 @@ public class App {
 
                                 logger.addTrade(new Trade(logger.generateTradeID(), timeOfTrade, dateOfTrade, stopLossInPips, finalPipAmmount));
                                 tradeCreationBool = false;
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 System.out.println("Invalid input. Please try again.");
