@@ -1,62 +1,48 @@
-# Project Title
+# BacktestLogger
 
-Simple overview of use/purpose.
+This application is used to log FOREX backtesting results up to 100 trades stored in a database.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+The application takes in multiple fields such as the pair, starting balance, timeframe and risk per position when descering the basis of a logger, as well as taking in relevant data for trades when required. You will also have the ability to access a automatically saving local databse `db.json`. This program is in the CLI.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Java JDK 17
+* Maven
+* json-simple 1.1.1 (In `pom.xml` already)
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* `git clone https://github.com/mghaby/backtestlogger.git`
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
 ```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
+cd backtestlogger/
+cd src/main/java/mghaby
+mvn compile
+cd target/classes/
+java App.class
 ```
 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+1. Mark Ghaby
+  * [Github](https://github.com/mghaby)
+  * [LinkedIn](https://www.linkedin.com/in/mghaby/)
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the GNU General Public License - see the LICENSE file for details
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [README-Template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
